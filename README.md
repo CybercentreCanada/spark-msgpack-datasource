@@ -121,7 +121,6 @@ Below is shown the default deserializer implementation:
 class ExtensionDeserializerProvider extends MessagePackExtensionDeserializerProvider {
     override def get(): ExtensionDeserializers = {
         val deserializers = new ExtensionDeserializers();
-        deserializers.set(new TimestampDeserializer(-1))
         for(i <- 0 to 127) {
             deserializers.set(new DefaultDeserializer(i))
         }
