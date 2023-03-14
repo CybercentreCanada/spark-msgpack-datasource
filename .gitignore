@@ -1,0 +1,10 @@
+/.bloop/**
+/.idea/**
+/.metals/**
+/.settings/**
+/.vscode/**
+/target/**
+/project/**
+/spark-warehouse/**
+.classpath
+.project
