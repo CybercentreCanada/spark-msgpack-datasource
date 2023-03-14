@@ -1,0 +1,32 @@
+trigger:
+  batch: true
+  branches:
+    include:
+    - main
+    - develop
+    - rc/*
+    - patch/*
+
+pr:
+  branches:
+    include:
+      - develop
+
+variables:
+  tag: '$(Build.BuildId)'
+
+pool: 'stratus-build-pool.u'
+
+steps:
+  - task: Maven@3
+    displayName: "Build project with maven"
+    inputs:
+      mavenPomFile: "pom.xml"
+      mavenOptions: "-Xmx3072m"
+      javaHomeOption: "path"
+      jdkVersionOption: "1.11"
+      jdkArchitectureOption: "x64"
+      jdkDirectory: "/usr/lib/jvm/java-11-openjdk-amd64"
+      publishJUnitResults: true
+      testResultsFiles: "**/surefire-reports/TEST-*.xml"
+      goals: "deploy"
