@@ -3,7 +3,7 @@
   <groupId>cccs.hogwarts.spark</groupId>
   <artifactId>spark-msgpack-datasource_2.12</artifactId>
   <packaging>jar</packaging>
-  <version>2.0.0</version>
+  <version>2.1.0-SNAPSHOT</version>
   <name>spark-msgpack-datasource</name>
   <description>A spark-sql data source for the msgpack file format.  Formerly known as spark-messagepack-datasource</description>
   <properties>
