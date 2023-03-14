@@ -59,21 +59,11 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
-  <distributionManagement>
-    <repository>
-      <id>cccs-stratus</id>
-      <url>https://pkgs.dev.azure.com/cccs-stratus/_packaging/cccs-stratus/maven/v1</url>
-    </repository>
-  </distributionManagement>
   <repositories>
     <repository>
       <id>scala-tools.org</id>
       <name>Scala-tools Maven2 Repository</name>
       <url>http://scala-tools.org/repo-releases</url>
-    </repository>
-    <repository>
-      <id>cccs-stratus</id>
-      <url>https://pkgs.dev.azure.com/cccs-stratus/_packaging/cccs-stratus/maven/v1</url>
     </repository>
   </repositories>
   <pluginRepositories>
