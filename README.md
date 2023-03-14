@@ -48,7 +48,7 @@ We expose our spark sql expressions through spark's native extensions API.
 
 ### Expressions
 ####  from_msgpack
-Simillarly to spark's native `from_json` expression, you can onvert one msgpack map raw data into a spark row.
+Simillarly to spark's native `from_json` expression, you can convert one msgpack map raw data into a spark row.
 
 As an example, assuming that you have a dataframe or a table named 'my_table' with the following structure:
 ```
