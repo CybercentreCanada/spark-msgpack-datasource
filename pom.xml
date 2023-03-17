@@ -19,7 +19,11 @@
     <developerConnection>scm:git:https://github.com/CybercentreCanada/spark-msgpack-datasource.git</developerConnection>
     <url>scm:git:git@github.com:CybercentreCanada/spark-msgpack-datasource.git</url>
     <tag>HEAD</tag>
-  </scm>  
+  </scm>
+  <organization>
+    <name>Canadian Centre for Cyber Security</name>
+    <url>https://www.cyber.gc.ca/</url>
+  </organization>    
   <properties>
     <java.version>11</java.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
