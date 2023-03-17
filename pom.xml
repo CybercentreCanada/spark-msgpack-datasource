@@ -7,6 +7,19 @@
   <name>spark-msgpack-datasource</name>
   <description>A spark datasource implementation for the msgpack file format.</description>
   <url>https://github.com/CybercentreCanada/spark-msgpack-datasource</url>
+  <licenses>
+    <license>
+      <name>MIT License</name>
+      <url>https://github.com/CybercentreCanada/spark-msgpack-datasource/blob/main/LICENSE.md</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>  
+  <scm>
+    <connection>scm:git:git@github.com:CybercentreCanada/spark-msgpack-datasource.git</connection>
+    <developerConnection>scm:git:https://github.com/CybercentreCanada/spark-msgpack-datasource.git</developerConnection>
+    <url>scm:git:git@github.com:CybercentreCanada/spark-msgpack-datasource.git</url>
+    <tag>HEAD</tag>
+  </scm>  
   <properties>
     <java.version>11</java.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
