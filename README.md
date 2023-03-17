@@ -1,3 +1,5 @@
+# [Français](README.fr.md)
+
 # MessagePack for Spark
 
 A Spark Datasource implementation for MessagePack.
