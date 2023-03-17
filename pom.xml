@@ -10,8 +10,7 @@
   <licenses>
     <license>
       <name>MIT License</name>
-      <url>https://github.com/CybercentreCanada/spark-msgpack-datasource/blob/main/LICENSE.md</url>
-      <distribution>repo</distribution>
+      <url>http://www.opensource.org/licenses/mit-license.php</url>
     </license>
   </licenses>  
   <scm>
@@ -23,7 +22,15 @@
   <organization>
     <name>Canadian Centre for Cyber Security</name>
     <url>https://www.cyber.gc.ca/</url>
-  </organization>    
+  </organization>
+ <developers>
+    <developer>
+      <name>Analysis Support</name>
+      <email>analysis-support@cyber.gc.com</email>
+      <organization>Canadian Centre for Cyber Security</organization>
+      <organizationUrl>https://www.cyber.gc.ca/</organizationUrl>
+    </developer>
+  </developers>
   <properties>
     <java.version>11</java.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
