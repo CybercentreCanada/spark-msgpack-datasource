@@ -8,6 +8,16 @@ Une implémentation Spark Datasource pour MessagePack.
 * [msgpack](https://msgpack.org/index.html)
 * [msgpack-java](https://github.com/msgpack/msgpack-java)
 
+## Coordonnées Maven
+```xml
+<dependency>
+    <groupId>io.github.cybercentrecanada</groupId>
+    <artifactId>spark-msgpack-datasource_2.12</artifactId>
+    <version>0.0.1</version>
+</dependency>
+```
+https://central.sonatype.com/artifact/io.github.cybercentrecanada/spark-msgpack-datasource_2.12/0.0.1
+
 ## Lire et écrire les données msgpack:
 ```scala
 
