@@ -34,7 +34,7 @@ df.write.format("messagepack").save("path/to/output/raw/messagepack")
 | deserializer.lenient    | Boolean | false   | When enabled, deserialization errors resulting from incompatibilities between the raw data and the schema will return null.                                           |
 | deserializer.trace_path | Boolean | false   | If an exception occurs while deserializing the values against the specified schema, the message will indicate the exact location in the data where the error occured. |
 | schema.max_sample_files | Number  | 10      | The maximum number of files read during schema inference.  Set to 0 for no limit.                                                                                     |
-| schema.max_sample_rows  | Number  | 10000   | The maximum number of row to sample in each file during schema inference.  Set to 0 for no limit.                                                                     |
+| schema.max_sample_rows  | Number  | 10000   | The maximum number of rows to sample in each file during schema inference.  Set to 0 for no limit.                                                                     |
 
 
 ### Example:
