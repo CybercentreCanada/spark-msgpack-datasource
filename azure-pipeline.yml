@@ -1,0 +1,27 @@
+trigger:
+  batch: true
+  branches:
+    include:
+    - develop
+    - main
+
+pr:
+  branches:
+    include:
+      - develop
+
+variables:
+  tag: '$(Build.BuildId)'
+
+steps:
+  - task: Maven@3
+    displayName: "Build project with maven"
+    inputs:
+      mavenPomFile: "pom.xml"
+      mavenOptions: "-Xmx3072m"
+      javaHomeOption: 'JDKVersion'
+      jdkVersionOption: '1.11'
+      jdkArchitectureOption: 'x64'
+      publishJUnitResults: true
+      testResultsFiles: '**/surefire-reports/TEST-*.xml'
+      goals: 'package'
