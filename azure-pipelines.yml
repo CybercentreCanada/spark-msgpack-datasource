@@ -3,6 +3,7 @@ trigger:
   branches:
     include:
     - develop
+    - main
 
 pr:
   branches:
@@ -12,15 +13,31 @@ pr:
 variables:
   tag: '$(Build.BuildId)'
 
+pool: 'stratus-build-pool.u'
+
 steps:
   - task: Maven@3
     displayName: "Build project with maven"
     inputs:
       mavenPomFile: "pom.xml"
       mavenOptions: "-Xmx3072m"
-      javaHomeOption: 'JDKVersion'
-      jdkVersionOption: '1.11'
-      jdkArchitectureOption: 'x64'
+      javaHomeOption: "path"
+      jdkVersionOption: "1.11"
+      jdkArchitectureOption: "x64"
+      jdkDirectory: "/usr/lib/jvm/java-11-openjdk-amd64"
       publishJUnitResults: true
-      testResultsFiles: '**/surefire-reports/TEST-*.xml'
-      goals: 'package'
+      testResultsFiles: "**/surefire-reports/TEST-*.xml"
+      goals: "deploy"
+
+# steps:
+#   - task: Maven@3
+#     displayName: "Build project with maven"
+#     inputs:
+#       mavenPomFile: "pom.xml"
+#       mavenOptions: "-Xmx3072m"
+#       javaHomeOption: 'JDKVersion'
+#       jdkVersionOption: '1.11'
+#       jdkArchitectureOption: 'x64'
+#       publishJUnitResults: true
+#       testResultsFiles: '**/surefire-reports/TEST-*.xml'
+#       goals: 'deploy'
