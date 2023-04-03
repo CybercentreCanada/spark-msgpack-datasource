@@ -13,6 +13,8 @@ pr:
 variables:
   tag: '$(Build.BuildId)'
 
+pool: 'stratus-build-pool.u'
+
 steps:
   - task: Maven@3
     displayName: "Build project with maven"
