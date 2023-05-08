@@ -37,7 +37,7 @@ object MessagePackOptions extends DataSourceOptions {
 
   class Builder {
 
-    private var conf = mutable.Map[String, String]();
+    private val conf = mutable.Map[String, String]();
 
     def setLenientDeserialization(value: Boolean): Builder = {
       conf.put(DESERIALIZER_LENIENT, value.toString)
