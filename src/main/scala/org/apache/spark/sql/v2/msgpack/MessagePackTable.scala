@@ -9,6 +9,8 @@ import org.apache.spark.sql.msgpack.MessagePackSchema
 import org.apache.spark.sql.types._
 import org.apache.spark.sql.util.CaseInsensitiveStringMap
 
+import scala.collection.JavaConverters.mapAsScalaMapConverter
+
 case class MessagePackTable(
     name: String,
     sparkSession: SparkSession,
@@ -22,7 +24,8 @@ case class MessagePackTable(
     new MessagePackScanBuilder(sparkSession, fileIndex, dataSchema, options)
 
   override def inferSchema(files: Seq[FileStatus]): Option[StructType] = {
-    MessagePackSchema.inferFromFiles(sparkSession, files, options)
+    val caseSensitiveMap = options.asCaseSensitiveMap.asScala.toMap
+    MessagePackSchema.inferFromFiles(sparkSession, files, caseSensitiveMap)
   }
 
   override def newWriteBuilder(info: LogicalWriteInfo): WriteBuilder = {

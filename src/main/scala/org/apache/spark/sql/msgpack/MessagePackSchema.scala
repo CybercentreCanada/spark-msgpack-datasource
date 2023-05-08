@@ -14,7 +14,7 @@ import scala.util.{Failure, Success, Try}
 
 object MessagePackSchema extends Logging {
 
-  private def infer(is: InputStream, options: MessagePackOptions = new MessagePackOptions()): StructType = {
+  private def infer(is: InputStream, options: MessagePackOptions = MessagePackOptions()): StructType = {
     infer(MessagePack.newDefaultUnpacker(is), options)
   }
 
@@ -34,7 +34,7 @@ object MessagePackSchema extends Logging {
   def inferFromFiles(
       sparkSession: SparkSession,
       files: Seq[FileStatus],
-      options: CaseInsensitiveStringMap
+      options: Map[String, String]
   ): Option[StructType] = {
 
     val conf = sparkSession.sparkContext.hadoopConfiguration

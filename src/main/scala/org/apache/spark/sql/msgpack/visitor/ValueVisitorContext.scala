@@ -6,7 +6,7 @@ import org.apache.spark.sql.types.DataType
 import scala.collection.mutable
 import scala.collection.mutable.ListBuffer
 
-class ValueVisitorContext(var dataType: DataType = null, val options: MessagePackOptions = new MessagePackOptions()) {
+class ValueVisitorContext(var dataType: DataType = null, val options: MessagePackOptions = MessagePackOptions()) {
 
   def this(options: MessagePackOptions) = this(null, options)
 

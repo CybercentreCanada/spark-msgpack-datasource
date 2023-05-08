@@ -29,8 +29,8 @@ case class MessagePackScan(
   override def isSplitable(path: Path): Boolean = false
 
   override def createReaderFactory(): PartitionReaderFactory = {
-    val messagePackOptions = new MessagePackOptions(options)
     val caseSensitiveMap = options.asCaseSensitiveMap.asScala.toMap
+    val messagePackOptions = new MessagePackOptions(caseSensitiveMap)
     val hadoopConf = sparkSession.sessionState.newHadoopConfWithOptions(caseSensitiveMap)
     val broadcastedConf = sparkSession.sparkContext.broadcast(new SerializableConfiguration(hadoopConf))
     MessagePackPartitionReaderFactory(

@@ -17,7 +17,15 @@ class MessagePackOptionSuite extends QueryTest with SharedSparkSession {
       packer.packMapHeader(1).packString("one").packLong(1L).packMapHeader(1).packString("one").packDouble(2d)
   }
 
-  test("deserialization.lenient: false") {
+  test("valid options") {
+    assert(MessagePackOptions.getAllOptions.size === 4)
+    assert(MessagePackOptions.isValidOption("schema.max_sample_files"))
+    assert(MessagePackOptions.isValidOption("schema.max_sample_rows"))
+    assert(MessagePackOptions.isValidOption("deserializer.trace_path"))
+    assert(MessagePackOptions.isValidOption("deserializer.lenient"))
+  }
+
+  test("deserialization.lenient: false -> yields exceptions") {
     val data = new InconsistentData();
     val df = spark.read
       .format("messagepack")
@@ -30,7 +38,7 @@ class MessagePackOptionSuite extends QueryTest with SharedSparkSession {
     assert(exception.getCause.getCause.getMessage === "msgpack[STRING] cannot be converted to spark[long]")
   }
 
-  test("deserialization.lenient: true") {
+  test("deserialization.lenient: true -> yields null.") {
     val data = new InconsistentData();
     val df = spark.read
       .format("messagepack")

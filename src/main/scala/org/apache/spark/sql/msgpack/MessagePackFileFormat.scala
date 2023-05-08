@@ -33,7 +33,7 @@ class MessagePackFileFormat extends FileFormat with DataSourceRegister with Logg
       options: Map[String, String],
       files: Seq[FileStatus]
   ): Option[StructType] = {
-    MessagePackSchema.inferFromFiles(sparkSession, files, new CaseInsensitiveStringMap(options.asJava))
+    MessagePackSchema.inferFromFiles(sparkSession, files, options)
   }
 
   override def prepareWrite(
@@ -64,12 +64,12 @@ class MessagePackFileFormat extends FileFormat with DataSourceRegister with Logg
     val deserializer = new MessagePackDeserializer(
       requiredSchema,
       dataSchema,
-      new MessagePackOptions(new CaseInsensitiveStringMap(options.asJava))
+      new MessagePackOptions(options)
     )
 
     // deserialize over each file.
     (file: PartitionedFile) => {
-      val path = new Path(new URI(file.filePath))
+      val path = file.filePath.toPath
       val is = MessagePackUtil.createInputStream(path, conf)
       deserializer.deserialize(MessagePack.newDefaultUnpacker(is))
     }
