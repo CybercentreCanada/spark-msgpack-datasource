@@ -14,7 +14,7 @@ import scala.util.{Failure, Success, Try}
 
 object MessagePackSchema extends Logging {
 
-  private def infer(is: InputStream, options: MessagePackOptions = new MessagePackOptions()): StructType = {
+  private def infer(is: InputStream, options: MessagePackOptions = MessagePackOptions()): StructType = {
     infer(MessagePack.newDefaultUnpacker(is), options)
   }
 

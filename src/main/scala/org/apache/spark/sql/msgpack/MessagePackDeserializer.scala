@@ -12,7 +12,7 @@ import java.io.InputStream
 class MessagePackDeserializer(readSchema: StructType, dataSchema: StructType, options: MessagePackOptions)
     extends Serializable {
 
-  def this(readSchema: StructType, options: MessagePackOptions = new MessagePackOptions()) =
+  def this(readSchema: StructType, options: MessagePackOptions = MessagePackOptions()) =
     this(readSchema, readSchema, options)
 
   def deserialize(bytes: Array[Byte]): Iterator[InternalRow] = {

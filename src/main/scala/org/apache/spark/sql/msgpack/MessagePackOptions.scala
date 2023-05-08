@@ -1,41 +1,43 @@
 package org.apache.spark.sql.msgpack
 
-import org.apache.spark.sql.catalyst.FileSourceOptions
-import org.apache.spark.sql.catalyst.util.CaseInsensitiveMap
-import org.apache.spark.sql.msgpack.MessagePackOptions._
-import org.apache.spark.sql.util.CaseInsensitiveStringMap
+import org.apache.spark.sql.catalyst.{DataSourceOptions, FileSourceOptions}
+import org.apache.spark.sql.msgpack.MessagePackOptions.{
+  DESERIALIZER_LENIENT,
+  DESERIALIZER_TRACEPATH,
+  SCHEMA_MAXSAMPLEFILES,
+  SCHEMA_MAXSAMPLEROWS
+}
 
-import scala.collection.JavaConverters._
 import scala.collection.mutable
 
-object MessagePackOptions {
+class MessagePackOptions(parameters: Map[String, String]) extends FileSourceOptions(parameters) {
 
-  val SCHEMA_MAXSAMPLEFILES = "schema.max_sample_files"
+  val schemaMaxSampleFiles: Int = parameters.get(SCHEMA_MAXSAMPLEFILES).map(_.toInt).getOrElse(10)
 
-  private val SCHEMA_MAXSAMPLEFILES_DEFAULT: Int = 10
+  val schemaMaxSampleRows: Int = parameters.get(SCHEMA_MAXSAMPLEROWS).map(_.toInt).getOrElse(10000)
 
-  val SCHEMA_MAXSAMPLEROWS = "schema.max_sample_rows"
+  val deserializerTracePath: Boolean = parameters.get(DESERIALIZER_TRACEPATH).exists(_.toBoolean)
 
-  private val SCHEMA_MAXSAMPLEROWS_DEFAULT = 10000
+  val deserializerLenient: Boolean = parameters.get(DESERIALIZER_LENIENT).exists((_.toBoolean))
+}
 
-  val DESERIALIZER_TRACEPATH = "deserializer.trace_path"
+object MessagePackOptions extends DataSourceOptions {
 
-  private val DESERIALIZER_TRACEPATH_DEFAULT = false
+  def apply(parameters: Map[String, String] = Map.empty): MessagePackOptions = new MessagePackOptions(parameters)
 
-  val DESERIALIZER_LENIENT = "deserializer.lenient"
+  val SCHEMA_MAXSAMPLEFILES: String = newOption("schema.max_sample_files")
 
-  private val DESERIALIZER_LENIENT_DEFAULT = false
+  val SCHEMA_MAXSAMPLEROWS: String = newOption("schema.max_sample_rows")
+
+  val DESERIALIZER_TRACEPATH: String = newOption("deserializer.trace_path")
+
+  val DESERIALIZER_LENIENT: String = newOption("deserializer.lenient")
 
   def builder: Builder = new Builder()
 
   class Builder {
 
     private var conf = mutable.Map[String, String]();
-
-    def setConf(conf: CaseInsensitiveStringMap): Builder = {
-      this.conf = conf.asCaseSensitiveMap().asScala
-      this
-    }
 
     def setLenientDeserialization(value: Boolean): Builder = {
       conf.put(DESERIALIZER_LENIENT, value.toString)
@@ -59,37 +61,5 @@ object MessagePackOptions {
 
     def get = new MessagePackOptions(conf.map(kv => (kv._1, kv._2)).toMap)
   }
-}
 
-class MessagePackOptions(options: Map[String, String] = Map.empty) extends FileSourceOptions(options) {
-
-  private def getInt(key: String, default: Int) = {
-    val v = options.getOrElse(key, null)
-    if (v == null) default else v.toInt
-  }
-
-  private def getBoolean(key: String, default: Boolean) = {
-    val v = options.getOrElse(key, null)
-    if (v == null) default else v.toBoolean
-  }
-
-  val schemaMaxSampleFiles: Int =
-    getInt(
-      SCHEMA_MAXSAMPLEFILES,
-      SCHEMA_MAXSAMPLEFILES_DEFAULT
-    )
-
-  val schemaMaxSampleRows: Int =
-    getInt(
-      SCHEMA_MAXSAMPLEROWS,
-      SCHEMA_MAXSAMPLEROWS_DEFAULT
-    )
-
-  val deserializerTracePath: Boolean =
-    getBoolean(
-      DESERIALIZER_TRACEPATH,
-      DESERIALIZER_TRACEPATH_DEFAULT
-    )
-
-  val deserializerLenient: Boolean = getBoolean(DESERIALIZER_LENIENT, DESERIALIZER_LENIENT_DEFAULT)
 }
