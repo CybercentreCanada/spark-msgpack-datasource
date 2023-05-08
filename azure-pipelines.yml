@@ -28,6 +28,7 @@ steps:
       publishJUnitResults: true
       testResultsFiles: "**/surefire-reports/TEST-*.xml"
       goals: "deploy"
+      options: "-Dgpg.skip=false"
 
 # steps:
 #   - task: Maven@3

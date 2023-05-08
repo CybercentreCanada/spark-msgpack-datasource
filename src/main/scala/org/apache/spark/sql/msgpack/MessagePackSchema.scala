@@ -34,7 +34,7 @@ object MessagePackSchema extends Logging {
   def inferFromFiles(
       sparkSession: SparkSession,
       files: Seq[FileStatus],
-      options: CaseInsensitiveStringMap
+      options: Map[String, String]
   ): Option[StructType] = {
 
     val conf = sparkSession.sparkContext.hadoopConfiguration

@@ -26,7 +26,8 @@ case class MessagePackPartitionReaderFactory(
       partitionedFile: PartitionedFile
   ): PartitionReader[InternalRow] = {
     val conf = broadcastedConf.value.value
-    val path = new Path(new URI(partitionedFile.filePath))
+//    val path = new Path(new URI(partitionedFile.filePath))
+    val path = partitionedFile.filePath.toPath
     val is = MessagePackUtil.createInputStream(path, conf)
     new PartitionReaderFromIterator[InternalRow](
       new MessagePackDeserializer(readDataSchema, dataSchema, options).deserialize(is)

@@ -1,5 +1,7 @@
 package org.apache.spark.sql.msgpack
 
+import org.apache.spark.sql.catalyst.FileSourceOptions
+import org.apache.spark.sql.catalyst.util.CaseInsensitiveMap
 import org.apache.spark.sql.msgpack.MessagePackOptions._
 import org.apache.spark.sql.util.CaseInsensitiveStringMap
 
@@ -24,7 +26,7 @@ object MessagePackOptions {
 
   private val DESERIALIZER_LENIENT_DEFAULT = false
 
-  val builder = new Builder()
+  def builder: Builder = new Builder()
 
   class Builder {
 
@@ -55,28 +57,39 @@ object MessagePackOptions {
       this
     }
 
-    def get = new MessagePackOptions(new CaseInsensitiveStringMap(conf.asJava))
+    def get = new MessagePackOptions(conf.map(kv => (kv._1, kv._2)).toMap)
   }
 }
 
-class MessagePackOptions(options: CaseInsensitiveStringMap = CaseInsensitiveStringMap.empty()) extends Serializable {
+class MessagePackOptions(options: Map[String, String] = Map.empty) extends FileSourceOptions(options) {
+
+  private def getInt(key: String, default: Int) = {
+    val v = options.getOrElse(key, null)
+    if (v == null) default else v.toInt
+  }
+
+  private def getBoolean(key: String, default: Boolean) = {
+    val v = options.getOrElse(key, null)
+    if (v == null) default else v.toBoolean
+  }
+
   val schemaMaxSampleFiles: Int =
-    options.getInt(
+    getInt(
       SCHEMA_MAXSAMPLEFILES,
       SCHEMA_MAXSAMPLEFILES_DEFAULT
     )
 
   val schemaMaxSampleRows: Int =
-    options.getInt(
+    getInt(
       SCHEMA_MAXSAMPLEROWS,
       SCHEMA_MAXSAMPLEROWS_DEFAULT
     )
 
   val deserializerTracePath: Boolean =
-    options.getBoolean(
+    getBoolean(
       DESERIALIZER_TRACEPATH,
       DESERIALIZER_TRACEPATH_DEFAULT
     )
 
-  val deserializerLenient: Boolean = options.getBoolean(DESERIALIZER_LENIENT, DESERIALIZER_LENIENT_DEFAULT)
+  val deserializerLenient: Boolean = getBoolean(DESERIALIZER_LENIENT, DESERIALIZER_LENIENT_DEFAULT)
 }

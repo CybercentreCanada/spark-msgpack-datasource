@@ -1,6 +1,6 @@
 package org.apache.spark.sql.msgpack.suite
 
-import org.apache.spark.sql.msgpack.test.data.impl.OneRowData
+import org.apache.spark.sql.msgpack.test.data.impl.{ComplexData, OneRowData}
 import org.scalatest.funsuite.AnyFunSuite
 
 class MessagePackDataSuite extends AnyFunSuite {
