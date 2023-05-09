@@ -11,12 +11,13 @@ A Spark Datasource implementation for MessagePack.
 ## Maven Coordinates
 ```xml
 <dependency>
-    <groupId>io.github.cybercentrecanada</groupId>
-    <artifactId>spark-msgpack-datasource_2.12</artifactId>
-    <version>0.0.1</version>
+  <groupId>io.github.cybercentrecanada</groupId>
+  <artifactId>spark-msgpack-datasource-3.4_2.12</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
 </dependency>
 ```
-https://central.sonatype.com/artifact/io.github.cybercentrecanada/spark-msgpack-datasource_2.12/0.0.1
+
+https://central.sonatype.com/artifact/io.github.cybercentrecanada/spark-msgpack-datasource-3.4_2.12/0.0.2/versions
 ## Read and Write MessagePack data:
 
 ```scala
