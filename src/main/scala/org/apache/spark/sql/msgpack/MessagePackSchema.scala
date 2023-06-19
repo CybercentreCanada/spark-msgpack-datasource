@@ -2,7 +2,7 @@ package org.apache.spark.sql.msgpack
 
 import org.apache.hadoop.fs.FileStatus
 import org.apache.spark.internal.Logging
-import org.apache.spark.sql.SparkSession
+import org.apache.spark.sql.{Dataset, SparkSession}
 import org.apache.spark.sql.msgpack.converters.TypeDeserializer
 import org.apache.spark.sql.types.{DataType, StructType}
 import org.apache.spark.sql.util.CaseInsensitiveStringMap
@@ -14,9 +14,11 @@ import scala.util.{Failure, Success, Try}
 
 object MessagePackSchema extends Logging {
 
-  private def infer(is: InputStream, options: MessagePackOptions = MessagePackOptions()): StructType = {
+  private def infer(is: InputStream, options: MessagePackOptions = MessagePackOptions()): StructType =
     infer(MessagePack.newDefaultUnpacker(is), options)
-  }
+
+  private def infer(data: Array[Byte], options: MessagePackOptions): StructType =
+    infer(MessagePack.newDefaultUnpacker(data), options)
 
   private def infer(data: MessageUnpacker, options: MessagePackOptions): StructType = {
     var rowNum = 0
@@ -29,6 +31,15 @@ object MessagePackSchema extends Logging {
       rowNum += 1
     }
     MessagePackCoercion.coerce(schemas.result()).asInstanceOf[StructType]
+  }
+
+  def inferFromBinary(dataSet: Dataset[Array[Byte]], options: MessagePackOptions = MessagePackOptions()): StructType = {
+    val schemas = dataSet
+      .collect()
+      .map { raw =>
+        MessagePackSchema.infer(raw, options)
+      }
+    MessagePackCoercion.coerce(schemas).asInstanceOf[StructType]
   }
 
   def inferFromFiles(
