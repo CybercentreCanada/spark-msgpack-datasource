@@ -37,19 +37,6 @@ abstract class MessagePackData {
   }
 
   def write(directory: String, compress: Boolean, deleteOnExit: Boolean): String = {
-//    val path = Paths.get(directory, s"${name()}.${if (compress) "zst" else "mp"}")
-//    val content = if (compress) Zstd.compress(getBytes) else getBytes
-//
-//    if (!path.toFile.getParentFile.exists()) {
-//      path.toFile.getParentFile.createNewFile()
-//    }
-//
-//    filePath = Files.write(path, content)
-//    if (deleteOnExit) {
-//      filePath.toFile.deleteOnExit()
-//    }
-//    filePath.toAbsolutePath.toString
-
     write(s"${name()}.${if (compress) "zst" else "mp"}", directory, compress, deleteOnExit)
   }
 

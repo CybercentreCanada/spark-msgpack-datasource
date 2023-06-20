@@ -2,14 +2,17 @@ package org.apache.spark.sql.msgpack
 
 import org.apache.hadoop.fs.FileStatus
 import org.apache.spark.internal.Logging
+import org.apache.spark.rdd.RDD
 import org.apache.spark.sql.{Dataset, SparkSession}
 import org.apache.spark.sql.msgpack.converters.TypeDeserializer
 import org.apache.spark.sql.types.{DataType, StructType}
 import org.apache.spark.sql.util.CaseInsensitiveStringMap
 import org.apache.spark.util.Utils
 import org.msgpack.core.{MessagePack, MessageUnpacker}
+import scala.collection.JavaConverters._
 
 import java.io.InputStream
+import java.util
 import scala.util.{Failure, Success, Try}
 
 object MessagePackSchema extends Logging {
@@ -33,13 +36,15 @@ object MessagePackSchema extends Logging {
     MessagePackCoercion.coerce(schemas.result()).asInstanceOf[StructType]
   }
 
-  def inferFromBinary(dataSet: Dataset[Array[Byte]], options: MessagePackOptions = MessagePackOptions()): StructType = {
-    val schemas = dataSet
-      .collect()
-      .map { raw =>
-        MessagePackSchema.infer(raw, options)
-      }
+  def inferFromBinary(data: Array[Array[Byte]]): StructType = {
+    val schemas = data.map { raw =>
+      MessagePackSchema.infer(raw, MessagePackOptions())
+    }
     MessagePackCoercion.coerce(schemas).asInstanceOf[StructType]
+  }
+
+  def inferFromBinary(data: util.ArrayList[Array[Byte]]): StructType = {
+    inferFromBinary(data.asScala.toArray)
   }
 
   def inferFromFiles(
