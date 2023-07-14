@@ -13,7 +13,7 @@ A Spark Datasource implementation for MessagePack.
 <dependency>
   <groupId>io.github.cybercentrecanada</groupId>
   <artifactId>spark-msgpack-datasource-3.4_2.12</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.0.0</version>
 </dependency>
 ```
 
