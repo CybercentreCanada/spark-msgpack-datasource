@@ -62,10 +62,15 @@ class MessagePackExpressionsSuite extends QueryTest with SharedSparkSession {
     decodedDf.select("decoded.*").show()
   }
 
-  test("from_msgpack: expression using extension") {
+  test("from_msgpack: expression using extension (json schema)") {
     val decodedDf = spark.sql(s"select from_msgpack(raw, '${oneRowData.schema().json}') as decoded from my_table_1")
     decodedDf.printSchema()
     decodedDf.select("decoded.*").show()
   }
 
+  test("from_msgpack: expression using extension (ddl schema)") {
+    val decodedDf = spark.sql(s"select from_msgpack(raw, '${oneRowData.schema().toDDL}') as decoded from my_table_1")
+    decodedDf.printSchema()
+    decodedDf.select("decoded.*").show()
+  }
 }
