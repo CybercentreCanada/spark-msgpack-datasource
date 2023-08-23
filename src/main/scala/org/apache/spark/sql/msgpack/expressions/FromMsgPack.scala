@@ -14,6 +14,8 @@ import org.apache.spark.sql.msgpack.MessagePackDeserializer
 import org.apache.spark.sql.types.{AbstractDataType, BinaryType, DataType, StructType}
 import org.apache.spark.unsafe.types.UTF8String
 
+import scala.util.Try
+
 case class FromMsgPack(expr: Expression, schema: StructType)
     extends UnaryExpression
     with CodegenFallback
@@ -55,8 +57,9 @@ object FromMsgPack {
     (children: Seq[Expression]) => {
       val expr = children.head
       val schemaStr = children.seq(1).asInstanceOf[Literal].value.asInstanceOf[UTF8String]
-      val schemaType = DataType.fromJson(schemaStr.toString)
-      FromMsgPack(expr, schemaType.asInstanceOf[StructType])
+      val schemaType = Try(StructType.fromDDL(schemaStr.toString))
+        .getOrElse(DataType.fromJson(schemaStr.toString).asInstanceOf[StructType])
+      FromMsgPack(expr, schemaType)
     }
   )
 }
