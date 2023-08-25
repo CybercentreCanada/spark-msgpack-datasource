@@ -16,8 +16,8 @@ A Spark Datasource implementation for MessagePack.
   <version>1.0.0</version>
 </dependency>
 ```
+[spark-msgpack-datasource-3.4_2.12](https://central.sonatype.com/artifact/io.github.cybercentrecanada/spark-msgpack-datasource-3.4_2.12)
 
-https://central.sonatype.com/artifact/io.github.cybercentrecanada/spark-msgpack-datasource-3.4_2.12/0.0.2/versions
 ## Read and Write MessagePack data:
 
 ```scala
