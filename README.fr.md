@@ -12,11 +12,11 @@ Une implémentation Spark Datasource pour MessagePack.
 ```xml
 <dependency>
     <groupId>io.github.cybercentrecanada</groupId>
-    <artifactId>spark-msgpack-datasource_2.12</artifactId>
-    <version>0.0.1</version>
+    <artifactId>spark-msgpack-datasource-3.4_2.12</artifactId>
+    <version>1.2.0</version>
 </dependency>
 ```
-https://central.sonatype.com/artifact/io.github.cybercentrecanada/spark-msgpack-datasource_2.12/0.0.1
+[spark-msgpack-datasource-3.5_2.12](https://central.sonatype.com/artifact/io.github.cybercentrecanada/spark-msgpack-datasource-3.5_2.12)
 
 ## Lire et écrire les données msgpack:
 ```scala
