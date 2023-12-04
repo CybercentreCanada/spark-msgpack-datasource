@@ -17,7 +17,7 @@ steps:
     inputs:
       mavenPomFile: "pom.xml"
       mavenOptions: "-Xmx3072m"
-      javaHomeOption: "path"
+      javaHomeOption: "JDKVersion"
       jdkVersionOption: "1.11"
       jdkArchitectureOption: "x64"
       publishJUnitResults: true
