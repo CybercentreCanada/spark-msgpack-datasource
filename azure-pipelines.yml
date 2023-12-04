@@ -9,13 +9,19 @@ variables:
   tag: '$(Build.BuildId)'
 
 pool: 
-  vmImage: 'ubuntu-latest'
+  vmImage: ''
 
 steps:
+  - task: DownloadSecureFile@1
+    name: settingsxml
+    displayName: Download maven settings xml
+    inputs:
+      secureFile: settings_min.xml
   - task: Maven@3
     displayName: "Build project with maven"
     inputs:
       mavenPomFile: "pom.xml"
+      options: "-s $(settings_min.xml.secureFilePath)"
       mavenOptions: "-Xmx3072m"
       javaHomeOption: "JDKVersion"
       jdkVersionOption: "1.11"
