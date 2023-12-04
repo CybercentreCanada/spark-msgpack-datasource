@@ -21,7 +21,6 @@ steps:
     displayName: "Build project with maven"
     inputs:
       mavenPomFile: "pom.xml"
-      options: "-s $(settings_min.xml.secureFilePath)"
       mavenOptions: "-Xmx3072m"
       javaHomeOption: "JDKVersion"
       jdkVersionOption: "1.11"
@@ -29,4 +28,4 @@ steps:
       publishJUnitResults: true
       testResultsFiles: "**/surefire-reports/TEST-*.xml"
       goals: "deploy"
-      options: "-Dgpg.skip=false"
+      options: "-s $(settings_min.xml.secureFilePath) -Dgpg.skip=false"
