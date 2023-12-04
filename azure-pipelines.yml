@@ -28,4 +28,4 @@ steps:
       publishJUnitResults: true
       testResultsFiles: "**/surefire-reports/TEST-*.xml"
       goals: "deploy"
-      options: "-s $(settings_min.xml.secureFilePath) -Dgpg.skip=false"
+      options: "-s $(settingsxml.secureFilePath) -Dgpg.skip=false"
