@@ -5,10 +5,10 @@ trigger:
     - develop
     - main
 
-pr:
-  branches:
-    include:
-      - develop
+# pr:
+#   branches:
+#     include:
+#       - develop
 
 variables:
   tag: '$(Build.BuildId)'
