@@ -9,7 +9,7 @@ variables:
   tag: '$(Build.BuildId)'
 
 pool: 
-  vmImage: ''
+  vmImage: 'ubuntu-latest'
 
 steps:
   - task: DownloadSecureFile@1
