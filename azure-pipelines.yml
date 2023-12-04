@@ -8,7 +8,8 @@ trigger:
 variables:
   tag: '$(Build.BuildId)'
 
-pool: 'ubuntu-latest'
+pool: 
+  vmImage: 'ubuntu-latest'
 
 steps:
   - task: Maven@3
