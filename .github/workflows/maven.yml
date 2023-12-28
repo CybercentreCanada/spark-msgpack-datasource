@@ -6,7 +6,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Java CI with Maven
+name: Build and Publish
 
 on:
   push:
@@ -18,6 +18,10 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
 
     steps:
     - uses: actions/checkout@v3
@@ -27,8 +31,11 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: maven
+        server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
+        settings-path: ${{ github.workspace }} # location for the settings.xml file
+
     - name: Build with Maven
-      run: mvn -B package --file pom.xml
+      run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     # - name: Update dependency graph
