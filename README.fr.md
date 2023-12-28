@@ -1,6 +1,7 @@
 # [English](README.md)
 
 # MessagePack pour Spark
+[![Build and Publish](https://github.com/CybercentreCanada/spark-msgpack-datasource/actions/workflows/maven.yml/badge.svg)](https://github.com/CybercentreCanada/spark-msgpack-datasource/actions/workflows/maven.yml)
 
 Une implémentation Spark Datasource pour MessagePack.
 
