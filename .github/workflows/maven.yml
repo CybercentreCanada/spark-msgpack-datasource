@@ -35,7 +35,7 @@ jobs:
         cat <(echo -e "${{ secrets.OSSRH_GPG_SECRET_KEY }}") | gpg --batch --import
         gpg --list-secret-keys --keyid-format LONG
     - name: Build and Publish with Maven
-      run: mvn -B -Dgpg.passphrase=${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }} deploy --file pom.xml
+      run: mvn -B -Dgpg.passphrase=${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }} -Dgpg.skip=false deploy --file pom.xml
       env:
         MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
         MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
