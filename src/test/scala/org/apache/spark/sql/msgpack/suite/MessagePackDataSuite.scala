@@ -22,5 +22,4 @@ class MessagePackDataSuite extends AnyFunSuite {
     oneRow.delete()
     assert(oneRow.onFs === false)
   }
-
 }
