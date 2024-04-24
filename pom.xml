@@ -3,7 +3,7 @@
   <groupId>io.github.cybercentrecanada</groupId>
   <artifactId>spark-msgpack-datasource-3.5_2.12</artifactId>
   <packaging>jar</packaging>
-  <version>1.8.0-SNAPSHOT</version>
+  <version>1.8.0</version>
   <name>spark-msgpack-datasource</name>
   <description>A spark datasource implementation for the msgpack file format.</description>
   <url>https://github.com/CybercentreCanada/spark-msgpack-datasource</url>
@@ -114,14 +114,13 @@
           <source>${java.version}</source>
           <target>${java.version}</target>
         </configuration>
-      </plugin>  
+      </plugin>
       <plugin>
         <groupId>org.scalatest</groupId>
         <artifactId>scalatest-maven-plugin</artifactId>
         <version>2.2.0</version>
         <configuration>
-          <argLine>
-            --add-opens=java.base/java.lang=ALL-UNNAMED
+          <argLine>--add-opens=java.base/java.lang=ALL-UNNAMED
             --add-opens=java.base/java.lang.invoke=ALL-UNNAMED
             --add-opens=java.base/java.lang.reflect=ALL-UNNAMED
             --add-opens=java.base/java.io=ALL-UNNAMED
@@ -133,8 +132,7 @@
             --add-opens=java.base/sun.nio.ch=ALL-UNNAMED
             --add-opens=java.base/sun.nio.cs=ALL-UNNAMED
             --add-opens=java.base/sun.security.action=ALL-UNNAMED
-            --add-opens=java.base/sun.util.calendar=ALL-UNNAMED
-          </argLine>
+            --add-opens=java.base/sun.util.calendar=ALL-UNNAMED</argLine>
         </configuration>
         <executions>
           <execution>
@@ -144,7 +142,7 @@
             </goals>
           </execution>
         </executions>
-      </plugin>        
+      </plugin>
       <plugin>
         <groupId>org.sonatype.plugins</groupId>
         <artifactId>nexus-staging-maven-plugin</artifactId>
