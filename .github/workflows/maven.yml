@@ -10,7 +10,7 @@ name: Build and Publish
 
 on:
   push:
-    branches: [ "develop", "main", "patch/*", "rc/*" ]
+    branches: [ "develop", "main", "patch/*", "rc/*", 'spark-*' ]
   pull_request:
     branches: [ "develop" ]
 
