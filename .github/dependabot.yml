@@ -1,0 +1,6 @@
+version: 2
+updates:
+  - package-ecosystem: "maven"
+    directory: "/"  # <= this should point to where pom.xml actually is
+    schedule:
+      interval: "daily"
