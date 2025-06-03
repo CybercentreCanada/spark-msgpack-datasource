@@ -34,7 +34,7 @@
   <properties>
     <gpg.skip>true</gpg.skip>
     <java.version>17</java.version>
-    <scala.version>2.12.18</scala.version>
+    <scala.version>2.13.16</scala.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   <dependencies>
