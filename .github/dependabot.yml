@@ -1,6 +1,0 @@
-version: 2
-updates:
-  - package-ecosystem: "maven"
-    directory: "/spark-msgpack-datasource"  # <= this should point to where pom.xml actually is
-    schedule:
-      interval: "daily"
