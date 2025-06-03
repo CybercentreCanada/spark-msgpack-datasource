@@ -9,6 +9,7 @@
 name: Build and Publish
 
 on:
+  workflow_dispatch: # enable manual trigger of workflow
   push:
     branches: [ "develop", "main", "patch/*", "rc/*"]
   pull_request:
