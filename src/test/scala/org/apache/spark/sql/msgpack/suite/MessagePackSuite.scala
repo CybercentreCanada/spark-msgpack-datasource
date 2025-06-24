@@ -5,8 +5,15 @@ import org.apache.spark.sql.execution.datasources.DataSource
 import org.apache.spark.sql.msgpack.MessagePackFileFormat
 import org.apache.spark.sql.test.SharedSparkSession
 import org.apache.spark.sql.v2.msgpack.MessagePackDataSourceV2
+import org.apache.spark.SparkConf
 
 class MessagePackSuite extends QueryTest with SharedSparkSession {
+
+  override protected def sparkConf: SparkConf =
+    super.sparkConf.set("spark.ui.enabled", "false")
+    super.sparkConf.set("spark.driver.host", "127.0.0.1")
+    super.sparkConf.set("spark.driver.bindAddress", "127.0.0.1")
+
 
   test("resolve 'messagepack' datasource (v1).") {
     val ds = DataSource.lookupDataSource(

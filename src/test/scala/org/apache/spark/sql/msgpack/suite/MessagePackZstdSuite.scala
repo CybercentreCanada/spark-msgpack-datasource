@@ -7,8 +7,13 @@ import org.apache.spark.sql.test.SharedSparkSession
 import org.scalatest.BeforeAndAfter
 
 import java.nio.file.{Files, Paths}
+import org.apache.spark.SparkConf
 
 class MessagePackZstdSuite extends QueryTest with SharedSparkSession with BeforeAndAfter {
+
+  override protected def sparkConf: SparkConf =
+    super.sparkConf.set("spark.driver.host", "127.0.0.1")
+
 
   test("read, load and count zst msgpack file") {
     val df = spark.read.format("messagepack").load(new ComplexData().write(compress = true))

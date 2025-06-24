@@ -11,6 +11,7 @@ import org.apache.spark.sql.types.{BinaryType, StructField, StructType}
 class MessagePackExpressionsSuite extends QueryTest with SharedSparkSession {
 
   override protected def sparkConf: SparkConf =
+    super.sparkConf.set("spark.driver.host", "127.0.0.1")
     super.sparkConf.set("spark.sql.extensions", "org.apache.spark.sql.msgpack.MessagePackExtensions")
 
   val oneRowData = new OneRowData()

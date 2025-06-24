@@ -12,6 +12,8 @@ import org.msgpack.value.{ExtensionValue, Value, ValueFactory}
 
 import java.io.InputStream
 import java.nio.ByteBuffer
+import org.apache.spark.sql.catalyst.expressions.Expression
+import org.apache.spark.sql.Column
 
 object MessagePackUtil extends Logging {
 
@@ -84,4 +86,20 @@ object MessagePackUtil extends Logging {
       s" @ ${context.resolvePath}"
     else ""}"
 
+
+  def extractExpression(col: Column): Expression = {
+    val field = classOf[Column].getDeclaredField("expr")
+    field.setAccessible(true)
+    field.get(col).asInstanceOf[Expression]
+  }
+
+  def expressionToColumn(expr: Expression): Column = {
+    // Column has a private constructor in 4.0.0 that takes an Expression
+    val ctor = classOf[Column].getDeclaredConstructors.find { c =>
+      val params = c.getParameterTypes
+      params.length == 1 && params(0).getName.contains("Expression")
+    }.get
+    ctor.setAccessible(true)
+    ctor.newInstance(expr).asInstanceOf[Column]
+  }  
 }

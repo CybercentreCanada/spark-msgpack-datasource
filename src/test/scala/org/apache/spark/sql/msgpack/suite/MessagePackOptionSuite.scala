@@ -8,8 +8,13 @@ import org.apache.spark.sql.msgpack.test.data.impl.InconsistentData
 import org.apache.spark.sql.msgpack.visitor.ValueVisitorException
 import org.apache.spark.sql.test.SharedSparkSession
 import org.apache.spark.sql.types.{DoubleType, LongType}
+import org.apache.spark.SparkConf
 
 class MessagePackOptionSuite extends QueryTest with SharedSparkSession {
+
+  override protected def sparkConf: SparkConf =
+    super.sparkConf.set("spark.driver.host", "127.0.0.1")
+
 
   private val COERCABLE_DATA = new MessagePackData() {
     override def name(): String = "CoercableData"

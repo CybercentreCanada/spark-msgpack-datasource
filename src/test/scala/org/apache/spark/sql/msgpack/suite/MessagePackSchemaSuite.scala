@@ -4,8 +4,13 @@ import org.apache.spark.sql.QueryTest
 import org.apache.spark.sql.msgpack.MessagePackSchema
 import org.apache.spark.sql.msgpack.test.data.impl._
 import org.apache.spark.sql.test.SharedSparkSession
+import org.apache.spark.SparkConf
 
 class MessagePackSchemaSuite extends QueryTest with SharedSparkSession {
+
+  override protected def sparkConf: SparkConf =
+    super.sparkConf.set("spark.driver.host", "127.0.0.1")
+
 
   test("inferFromBinary") {
     val data = new ComplexData()
