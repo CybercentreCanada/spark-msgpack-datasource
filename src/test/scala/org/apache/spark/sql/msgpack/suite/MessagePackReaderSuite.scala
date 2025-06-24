@@ -7,10 +7,6 @@ import org.apache.spark.SparkConf
 
 class MessagePackReaderSuite extends QueryTest with SharedSparkSession {
 
-  override protected def sparkConf: SparkConf =
-    super.sparkConf.set("spark.driver.host", "127.0.0.1")
-
-
   test("schema.inference: ensure IllegalArgumentException is thrown on NoMapRootData") {
     val message = intercept[IllegalArgumentException] {
       spark.read.format("messagepack").load(new NoMapRootData().write())
@@ -50,6 +46,5 @@ class MessagePackReaderSuite extends QueryTest with SharedSparkSession {
     assert(df.count() === 1)
     assert(df.schema.fields.length === 5)
   }
-
 
 }

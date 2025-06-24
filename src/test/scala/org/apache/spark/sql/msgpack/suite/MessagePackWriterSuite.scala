@@ -7,10 +7,6 @@ import org.apache.spark.SparkConf
 
 class MessagePackWriterSuite extends QueryTest with SharedSparkSession {
 
-  override protected def sparkConf: SparkConf =
-    super.sparkConf.set("spark.driver.host", "127.0.0.1")
-
-
   test("write: ComplexData") {
     val df = spark.read.format("messagepack").load(new ComplexData().write())
     withTempPath(dir => {

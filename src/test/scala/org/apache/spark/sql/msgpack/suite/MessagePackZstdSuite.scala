@@ -11,10 +11,6 @@ import org.apache.spark.SparkConf
 
 class MessagePackZstdSuite extends QueryTest with SharedSparkSession with BeforeAndAfter {
 
-  override protected def sparkConf: SparkConf =
-    super.sparkConf.set("spark.driver.host", "127.0.0.1")
-
-
   test("read, load and count zst msgpack file") {
     val df = spark.read.format("messagepack").load(new ComplexData().write(compress = true))
     assert(df.count() === 1)

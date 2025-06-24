@@ -9,12 +9,6 @@ import org.apache.spark.SparkConf
 
 class MessagePackSuite extends QueryTest with SharedSparkSession {
 
-  override protected def sparkConf: SparkConf =
-    super.sparkConf.set("spark.ui.enabled", "false")
-    super.sparkConf.set("spark.driver.host", "127.0.0.1")
-    super.sparkConf.set("spark.driver.bindAddress", "127.0.0.1")
-
-
   test("resolve 'messagepack' datasource (v1).") {
     val ds = DataSource.lookupDataSource(
       "org.apache.spark.sql.msgpack.MessagePackFileFormat",

@@ -8,10 +8,6 @@ import org.apache.spark.SparkConf
 
 class MessagePackSchemaSuite extends QueryTest with SharedSparkSession {
 
-  override protected def sparkConf: SparkConf =
-    super.sparkConf.set("spark.driver.host", "127.0.0.1")
-
-
   test("inferFromBinary") {
     val data = new ComplexData()
     val dataPath = data.write()

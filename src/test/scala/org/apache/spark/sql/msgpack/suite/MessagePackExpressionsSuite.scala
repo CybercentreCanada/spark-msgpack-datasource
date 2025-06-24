@@ -11,7 +11,6 @@ import org.apache.spark.sql.types.{BinaryType, StructField, StructType}
 class MessagePackExpressionsSuite extends QueryTest with SharedSparkSession {
 
   override protected def sparkConf: SparkConf =
-    super.sparkConf.set("spark.driver.host", "127.0.0.1")
     super.sparkConf.set("spark.sql.extensions", "org.apache.spark.sql.msgpack.MessagePackExtensions")
 
   val oneRowData = new OneRowData()
@@ -54,10 +53,8 @@ class MessagePackExpressionsSuite extends QueryTest with SharedSparkSession {
     oneRowOneColumnDf.createTempView("my_table")
   }
 
-  test("from_msgpack: expression using funciton") {
+  test("from_msgpack: expression using function") {
     val decodedDf = oneRowDf.select(from_msgpack(col("raw"), oneRowData.schema()).alias("decoded"))
-
-    println(oneRowData.schema())
     decodedDf.printSchema()
     oneRowDf.show()
     decodedDf.select("decoded.*").show()
