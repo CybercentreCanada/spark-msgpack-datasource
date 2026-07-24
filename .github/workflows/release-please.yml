@@ -5,6 +5,8 @@ on:
     branches:
       - main
       - 'releases/*'
+      # TEST ONLY
+      - release-please-config
 
 permissions:
   contents: write
