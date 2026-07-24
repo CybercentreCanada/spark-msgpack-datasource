@@ -14,7 +14,6 @@ import org.apache.spark.util.SerializableConfiguration
 import org.msgpack.core.MessagePack
 
 import java.net.URI
-import scala.collection.JavaConverters.mapAsJavaMapConverter
 
 class MessagePackFileFormat extends FileFormat with DataSourceRegister with Logging with Serializable {
 
