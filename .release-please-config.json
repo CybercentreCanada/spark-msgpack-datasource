@@ -1,0 +1,65 @@
+{
+  "bootstrap-sha": "e52148ddbfd4057a902d0222f644206d3bdc29de",
+  "packages": {
+    ".": {
+      "release-type": "maven",
+      "package-name": "spark-msgpack-datasource",
+      "include-component-in-tag": false,
+      "include-v-in-tag": true,
+      "changelog-sections": [
+        {
+          "type": "feat",
+          "section": "Features"
+        },
+        {
+          "type": "fix",
+          "section": "Bug Fixes"
+        },
+        {
+          "type": "perf",
+          "section": "Performance Improvements"
+        },
+        {
+          "type": "test",
+          "section": "Tests"
+        },
+        {
+          "type": "docs",
+          "section": "Documentation"
+        },
+        {
+          "type": "deps",
+          "section": "Dependencies"
+        },
+        {
+          "type": "refactor",
+          "section": "Code Refactoring"
+        },
+        {
+          "type": "infra",
+          "section": "Infrastructure-Related Code"
+        },
+        {
+          "type": "ci",
+          "section": "Continuous Integration"
+        },
+        {
+          "type": "build",
+          "section": "Build-Related Changes (i.e., Dockerfiles, build scripts)"
+        },
+        {
+          "type": "revert",
+          "section": "Reverting Changes"
+        },
+        {
+          "type": "style",
+          "section": "Style Changes"
+        },
+        {
+          "type": "chore",
+          "section": "Miscellaneous Chores"
+        }
+      ]
+    }
+  }
+}
