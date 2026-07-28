@@ -147,3 +147,24 @@ class ExtensionDeserializerProvider extends MessagePackExtensionDeserializerProv
 ## Contributions
 
 We accept, encourage, and appreciate contributions to this project.  Please send us a pull-request and we will review and get in touch with you.
+
+## Release process (release-please + GitHub Actions)
+
+This repository uses release-please with the `maven` strategy.
+
+### Version lifecycle
+
+- Normal development on `main` uses a SNAPSHOT version in `pom.xml` (for example, `1.11.0-SNAPSHOT`).
+- release-please opens a release PR that removes `-SNAPSHOT` (for example, `1.11.0`).
+- When that release PR is merged, CI deploys a final release artifact.
+- release-please then opens a follow-up PR to bump to the next development SNAPSHOT.
+- Maintainers need to merge the follow-up PR before continuing development.
+
+### Deployment behaviour
+
+- The GitHub Actions `Build and Publish` workflow always runs the build and tests.
+- Artifact deploy runs only when either:
+  - the build is on `main`, or
+  - the workflow is triggered manually (`workflow_dispatch`).
+- For SNAPSHOT versions, Maven deploys timestamped snapshot artifacts automatically.
+- For non-SNAPSHOT versions, Maven deploys a final release artifact.
