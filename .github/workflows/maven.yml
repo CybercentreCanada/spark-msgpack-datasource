@@ -3,15 +3,20 @@ name: Build and Publish
 on:
   workflow_dispatch: # enable manual trigger of workflow
   push:
-    branches: [ "develop", "main", "patch/*", "rc/*"]
+    branches: [ "main", "releases/*"]
   pull_request:
-    branches: [ "develop" ]
+    branches: [ "main", "releases/*"]
 
 jobs:
   build:
 
     runs-on: ubuntu-latest
-    
+
+    # Publish only when the workflow is manually triggered or running on main.
+    # Otherwise the job only builds and tests.
+    env:
+      PUBLISH: ${{ github.event_name == 'workflow_dispatch' || github.ref == 'refs/heads/main' }}
+
     steps:
     - uses: actions/checkout@v4
     - name: Set up JDK 17
@@ -22,9 +27,9 @@ jobs:
         cache: maven
         server-id: central
         server-username: MAVEN_USERNAME
-        server-password: MAVEN_PASSWORD        
+        server-password: MAVEN_PASSWORD
     - name: Install gpg secret key
-      if: github.actor != 'dependabot[bot]'
+      if: env.PUBLISH == 'true' && github.actor != 'dependabot[bot]'
       run: |
         cat <(echo -e "${{ secrets.OSSRH_GPG_SECRET_KEY }}") | gpg --batch --import
         gpg --list-secret-keys --keyid-format LONG
@@ -32,8 +37,12 @@ jobs:
       run: |
         echo "📂 Current working directory: $PWD"
         echo "🔍 Listing contents:"
-        tree -L 2 || ls -R        
+        tree -L 2 || ls -R
+    - name: Build and test with Maven
+      if: env.PUBLISH != 'true'
+      run: mvn -B verify --file pom.xml
     - name: Build and Publish with Maven
+      if: env.PUBLISH == 'true'
       run: |
         GPG_SKIP=$([[ "${{ github.actor }}" == "dependabot[bot]" ]] && echo "true" || echo "false")
         mvn -B -Dgpg.skip=$GPG_SKIP -Dgpg.passphrase=${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}  deploy --file pom.xml

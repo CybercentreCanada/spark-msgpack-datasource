@@ -147,3 +147,24 @@ class ExtensionDeserializerProvider extends MessagePackExtensionDeserializerProv
 
 ## Contributions
 Nous acceptons, encourageons et apprécions les contributions à ce projet. Veuillez nous envoyer une pull-request et nous l'examinerons et vous contacterons.
+
+## Processus de publication (release-please + GitHub Actions)
+
+Ce dépôt utilise release-please avec la stratégie `maven`.
+
+### Cycle de vie des versions
+
+- Le développement normal sur `main` utilise une version SNAPSHOT dans `pom.xml` (par exemple, `1.11.0-SNAPSHOT`).
+- release-please ouvre une PR de publication qui retire le suffixe `-SNAPSHOT` (par exemple, `1.11.0`).
+- Lorsque cette PR de publication est fusionnée, l'intégration continue déploie un artéfact de version finale.
+- release-please ouvre ensuite une PR de suivi pour passer à la prochaine version de développement SNAPSHOT.
+- Les responsables doivent fusionner la PR de suivi avant de poursuivre le développement.
+
+### Comportement de déploiement
+
+- Le flux de travail GitHub Actions `Build and Publish` exécute toujours la compilation et les tests.
+- Le déploiement de l'artéfact s'exécute uniquement lorsque l'une des conditions suivantes est remplie :
+  - la compilation s'exécute sur `main`, ou
+  - le flux de travail est déclenché manuellement (`workflow_dispatch`).
+- Pour les versions SNAPSHOT, Maven déploie automatiquement des artéfacts snapshot horodatés.
+- Pour les versions non-SNAPSHOT, Maven déploie un artéfact de version finale.
