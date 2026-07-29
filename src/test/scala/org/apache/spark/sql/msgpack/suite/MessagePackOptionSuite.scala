@@ -34,8 +34,8 @@ class MessagePackOptionSuite extends QueryTest with SharedSparkSession {
     val exception = intercept[SparkException] {
       df.show()
     }
-    assert(exception.getCause.getCause.isInstanceOf[ValueVisitorException])
-    assert(exception.getCause.getCause.getMessage === "msgpack[STRING] cannot be converted to spark[long]")
+    assert(exception.getCause.isInstanceOf[ValueVisitorException])
+    assert(exception.getCause.getMessage === "msgpack[STRING] cannot be converted to spark[long]")
   }
 
   test("deserialization.lenient: true -> yields null.") {
@@ -60,8 +60,8 @@ class MessagePackOptionSuite extends QueryTest with SharedSparkSession {
     val exception = intercept[SparkException] {
       df.show()
     }
-    assert(exception.getCause.getCause.isInstanceOf[ValueVisitorException])
-    assert(exception.getCause.getCause.getMessage === "msgpack[STRING] cannot be converted to spark[long] @ f2")
+    assert(exception.getCause.isInstanceOf[ValueVisitorException])
+    assert(exception.getCause.getMessage === "msgpack[STRING] cannot be converted to spark[long] @ f2")
   }
 
   test("schema.max_sample_rows: all") {
