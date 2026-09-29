@@ -9,7 +9,7 @@ import org.apache.spark.sql.msgpack.MessagePackSchema
 import org.apache.spark.sql.types._
 import org.apache.spark.sql.util.CaseInsensitiveStringMap
 
-import scala.collection.JavaConverters.mapAsScalaMapConverter
+import scala.jdk.CollectionConverters._
 
 case class MessagePackTable(
     name: String,

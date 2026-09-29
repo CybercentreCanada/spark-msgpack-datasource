@@ -11,7 +11,7 @@ import org.apache.spark.sql.types.StructType
 import org.apache.spark.sql.util.CaseInsensitiveStringMap
 import org.apache.spark.util.SerializableConfiguration
 
-import scala.collection.JavaConverters._
+import scala.jdk.CollectionConverters._
 
 case class MessagePackScan(
     sparkSession: SparkSession,
