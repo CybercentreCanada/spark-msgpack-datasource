@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.1](https://github.com/CybercentreCanada/spark-msgpack-datasource/compare/v2.0.0...v2.0.1) (2026-09-29)
+
+
+### Miscellaneous Chores
+
+* **main:** release 2.0.1-SNAPSHOT ([#50](https://github.com/CybercentreCanada/spark-msgpack-datasource/issues/50)) ([d829d51](https://github.com/CybercentreCanada/spark-msgpack-datasource/commit/d829d5141fcf31efe13893a15bd626c823e7b837))
+
 ## [2.0.0](https://github.com/CybercentreCanada/spark-msgpack-datasource/compare/v1.11.0...v2.0.0) (2026-09-29)
 
 
