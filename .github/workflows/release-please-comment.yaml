@@ -1,0 +1,42 @@
+name: Release Please Reminder
+
+on:
+  pull_request:
+    types: [opened]
+    branches:
+      - main
+      - "releases/*"
+
+permissions:
+  pull-requests: write
+
+jobs:
+  release-please-comment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Find open snapshot release PR
+        id: find-release-pr
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const pullRequests = await github.paginate(github.rest.pulls.list, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              per_page: 100,
+            });
+
+            const releasePullRequest = pullRequests.find((pullRequest) =>
+              pullRequest.labels.some((label) => label.name === 'autorelease: snapshot')
+            );
+
+            core.setOutput('url', releasePullRequest?.html_url ?? '');
+
+      - name: Post release-please reminder
+        if: steps.find-release-pr.outputs.url != ''
+        uses: marocchino/sticky-pull-request-comment@v3
+        with:
+          header: release-please-reminder
+          only_create: true
+          message: |
+            Reminder: You must merge [the Release Please PR for the updated SNAPSHOT](<${{ steps.find-release-pr.outputs.url }}>) before merging this PR.
