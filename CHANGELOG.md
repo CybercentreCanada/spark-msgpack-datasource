@@ -1,5 +1,22 @@
 # Changelog
 
+## [2.0.1](https://github.com/CybercentreCanada/spark-msgpack-datasource/compare/v2.0.0...v2.0.1) (2026-11-19)
+
+
+### Dependencies
+
+* **APA2B-94:** upgrade Spark to 4.1.4 ([#57](https://github.com/CybercentreCanada/spark-msgpack-datasource/issues/57)) ([f1d1566](https://github.com/CybercentreCanada/spark-msgpack-datasource/commit/f1d156628a5e1a03eeb7e920b97cad2f645a1604))
+
+
+### Continuous Integration
+
+* **SPBK-4291:** adding release please action for comments ([#56](https://github.com/CybercentreCanada/spark-msgpack-datasource/issues/56)) ([2740ca5](https://github.com/CybercentreCanada/spark-msgpack-datasource/commit/2740ca5bbd31b6270c92f587a0a5a2bb5c1b25d0))
+
+
+### Miscellaneous Chores
+
+* **main:** release 2.0.1-SNAPSHOT ([#50](https://github.com/CybercentreCanada/spark-msgpack-datasource/issues/50)) ([d829d51](https://github.com/CybercentreCanada/spark-msgpack-datasource/commit/d829d5141fcf31efe13893a15bd626c823e7b837))
+
 ## [2.0.0](https://github.com/CybercentreCanada/spark-msgpack-datasource/compare/v1.11.0...v2.0.0) (2026-09-29)
 
 
