@@ -75,7 +75,7 @@
     <dependency>
       <groupId>org.apache.spark</groupId>
       <artifactId>spark-catalyst_2.13</artifactId>
-      <version>4.1.4</version>
+      <version>4.3.0</version>
       <scope>test</scope>
       <classifier>tests</classifier>
     </dependency>
