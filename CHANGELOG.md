@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.0.2](https://github.com/CybercentreCanada/spark-msgpack-datasource/compare/v2.0.1...v2.0.2) (2026-11-26)
+
+
+### Miscellaneous Chores
+
+* **main:** release 2.0.2-SNAPSHOT ([#58](https://github.com/CybercentreCanada/spark-msgpack-datasource/issues/58)) ([3deb854](https://github.com/CybercentreCanada/spark-msgpack-datasource/commit/3deb854a4c2a4c28918c4c4d3e54e24cba8ec97d))
+* remove cccs-mdr as codeowner ([#64](https://github.com/CybercentreCanada/spark-msgpack-datasource/issues/64)) ([3e0d435](https://github.com/CybercentreCanada/spark-msgpack-datasource/commit/3e0d435af48c7525806753f3f66e82be413af50b))
+
 ## [2.0.1](https://github.com/CybercentreCanada/spark-msgpack-datasource/compare/v2.0.0...v2.0.1) (2026-11-19)
 
 
